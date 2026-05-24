@@ -1,0 +1,25 @@
+{
+  "quotes": [
+    {
+      "id": 1,
+      "quote": "Unborn, dead and stupid sons, The first two are to be preferred For they cause sorrow only once Whilst stupid sons are a torment to the heart Till the end of life",
+      "author": "Panchatantra",
+      "image": "images/img1.png",
+      "category": "Panchatantra"
+    },
+    {
+      "id": 2,
+      "quote": "There is nothing in life that money cannot achieve.\nAnd so a wise man should be bent on increasing his wealth.\nIf a man has money, he has friends.\nWhen he has money, he is recognised by his relatives.\nIn this world a stranger becomes kinsman to a moneyed man,\nWhilst a poor man is avoided even by his family.\nA man with money will even be considered a scholar.\nMoney makes the old young,\nBut the young grow old for want of it.",
+      "author": "Panchatantra",
+      "image": "images/img2.png",
+      "category": "Panchatantra"
+    },
+    {
+      "id": 3,
+      "quote": "Do not wait to strike till the iron is hot; but make it hot by striking.",
+      "author": "Panchatantra",
+      "image": "images/img3.png",
+      "category": "Panchatantra"
+    }
+  ]
+}

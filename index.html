@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quotes Gallery</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f7f7;color:#111}
+    header{background:#222;color:#fff;padding:1rem;text-align:center}
+    .container{max-width:1000px;margin:2rem auto;padding:0 1rem}
+    .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+    .filter-button{border:1px solid rgba(255,255,255,.55);background:#fff;color:#222;padding:.5rem .85rem;border-radius:999px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+    .filter-button.active,.filter-button:hover{background:#222;color:#fff;border-color:#222}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;align-items:start}
+    .card{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.08);display:flex;flex-direction:column}
+    .card.hidden{display:none}
+    .card img{width:100%;height:auto;display:block;object-fit:cover;transition:transform .25s ease}
+    .card.portrait img{object-fit:contain}
+    .card:hover img{transform:scale(1.02)}
+    .caption{padding:.75rem}
+    .category{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:#888;margin:0 0 .5rem;font-weight:700}
+    .quote{font-size:0.95rem;margin:0 0 .5rem}
+    .author{font-size:.85rem;color:#555}
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="margin:0">Quotes Gallery</h1>
+  </header>
+  <main class="container">
+    <div id="filters" class="filters"></div>
+    <div class="grid">
+      <article class="card" data-category="Panchatantra">
+  <img src="images/img1.png" alt="Unborn, dead and stupid sons, The first two are to be preferred For they cause s" />
+  <div class="caption">
+    <p class="category">Panchatantra</p>
+    <p class="quote">Unborn, dead and stupid sons, The first two are to be preferred For they cause sorrow only once Whilst stupid sons are a torment to the heart Till the end of life</p>
+    <p class="author">Panchatantra</p>
+  </div>
+</article>
+<article class="card" data-category="Panchatantra">
+  <img src="images/img2.png" alt="There is nothing in life that money cannot achieve.
+And so a wise man should be " />
+  <div class="caption">
+    <p class="category">Panchatantra</p>
+    <p class="quote">There is nothing in life that money cannot achieve.
+And so a wise man should be bent on increasing his wealth.
+If a man has money, he has friends.
+When he has money, he is recognised by his relatives.
+In this world a stranger becomes kinsman to a moneyed man,
+Whilst a poor man is avoided even by his family.
+A man with money will even be considered a scholar.
+Money makes the old young,
+But the young grow old for want of it.</p>
+    <p class="author">Panchatantra</p>
+  </div>
+</article>
+<article class="card" data-category="Panchatantra">
+  <img src="images/img3.png" alt="Do not wait to strike till the iron is hot; but make it hot by striking." />
+  <div class="caption">
+    <p class="category">Panchatantra</p>
+    <p class="quote">Do not wait to strike till the iron is hot; but make it hot by striking.</p>
+    <p class="author">Panchatantra</p>
+  </div>
+</article>
+    </div>
+  </main>
+  <script>
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const filters = document.getElementById('filters');
+    const categories = Array.from(new Set(cards.map(card => card.dataset.category).filter(Boolean)));
+
+    function setActiveFilter(button) {
+      document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    }
+
+    function filterCategory(category) {
+      cards.forEach(card => {
+        card.classList.toggle('hidden', category !== 'All' && card.dataset.category !== category);
+      });
+    }
+
+    function createButton(name, active = false) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'filter-button' + (active ? ' active' : '');
+      button.textContent = name;
+      button.addEventListener('click', () => {
+        setActiveFilter(button);
+        filterCategory(name);
+      });
+      return button;
+    }
+
+    filters.appendChild(createButton('All', true));
+    categories.forEach(category => filters.appendChild(createButton(category)));
+
+    document.querySelectorAll('.card img').forEach(img => {
+      const card = img.closest('.card');
+      function updateCard() {
+        if (!card) return;
+        const ratio = img.naturalWidth / img.naturalHeight;
+        card.classList.toggle('landscape', ratio >= 1.2);
+        card.classList.toggle('portrait', ratio < 1.2);
+      }
+      if (img.complete) {
+        updateCard();
+      } else {
+        img.addEventListener('load', updateCard);
+      }
+    });
+  </script>
+</body>
+</html>
